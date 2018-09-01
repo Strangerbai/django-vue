@@ -16,26 +16,33 @@ class GetMessageView(APIView):
         print(a)
         # 返回信息
         d = {
-            'status': 1,
+            'status': str(a),
             'message': 'success',
             }
         return JsonResponse(d)
 
 import os
-from forms import  Test
+from forms import MomnetForm
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from django.views.decorators.csrf import csrf_protect
+#
 def welcome(request):
     return HttpResponse("<h1>welcome to my tiny app</h1>")
-
-# def test(request):
-#     if request.method == 'POST':
-#         form = Test(request.POST)
-#         if form.is_valid():
-#             moment = form.save()
-#             return HttpResponseRedirect(reverse("apptest.views.welcome"))
+#
+@csrf_protect
+def test(request):
+    if request.method == 'POST':
+        form = MomnetForm(request.POST)
+        if form.is_valid():
+            moment = form.save()
+            moment.save()
+            return HttpResponseRedirect(reverse("apptest.views.welcome"))
+    else:
+        form = MomnetForm()
+    PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    return render(request, os.path.join(PROJECT_ROOT, 'apptest/templates', 'test_input.html'), {'form':form})
 
 

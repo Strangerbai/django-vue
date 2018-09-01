@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="?" method="post">
+<form action="?" method="post">{% csrf_token %}
     <fieldset>
         <legend>请输入并提交</legend>
             {{form.as_p}}
