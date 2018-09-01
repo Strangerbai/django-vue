@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     url(r'^test/$', views.GetMessageView.as_view()),
+    url(r'', views.welcome)
 
 ]
 
