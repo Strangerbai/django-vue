@@ -39,7 +39,7 @@ def test(request):
         if form.is_valid():
             moment = form.save()
             moment.save()
-            return HttpResponseRedirect(reverse("apptest.views.welcome"))
+            return HttpResponseRedirect(reverse("welcome"))
     else:
         form = MomnetForm()
     PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
